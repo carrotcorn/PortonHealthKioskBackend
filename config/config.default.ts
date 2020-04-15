@@ -1,4 +1,4 @@
-import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg'
+import { EggAppConfig, EggAppInfo, PowerPartial, Context } from 'egg'
 
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>
@@ -10,8 +10,20 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = []
 
+  config.security = {
+    csrf: {
+      enable: false
+    }
+  }
+
   // add your special config in here
   const bizConfig = {
+    onerror: {
+      json (err, ctx: Context) {
+        ctx.body = { success: false, error: err }
+        ctx.status = 500
+      }
+    },
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`
   }
 
