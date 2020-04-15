@@ -8,8 +8,8 @@
     "declarations": true
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-PortonHealthKioskBackend",
-    "stop": "egg-scripts stop --title=egg-server-PortonHealthKioskBackend",
+    "start": "egg-scripts start --daemon --title=egg-server-porton-health-kiosk-backend",
+    "stop": "egg-scripts stop --title=egg-server-porton-health-kiosk-backend",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test-local": "egg-bin test",
@@ -23,10 +23,12 @@
   },
   "dependencies": {
     "egg": "^2.6.1",
-    "egg-scripts": "^2.6.0"
+    "egg-scripts": "^2.6.0",
+    "mongoose": "^5.9.9"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
+    "@types/mongoose": "^5.7.10",
     "@types/node": "^7.0.12",
     "@types/supertest": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
