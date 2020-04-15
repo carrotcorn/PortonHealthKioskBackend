@@ -1,6 +1,6 @@
-# hackernews-async-ts
+# porton-health-kiosk-backend
 
-[Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
+Backend for Porton Health Kiosk
 
 ## QuickStart
 
