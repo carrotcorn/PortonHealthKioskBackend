@@ -2,10 +2,12 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
+import ExportClinic from '../../../app/controller/clinic';
 import ExportPublic from '../../../app/controller/public';
 
 declare module 'egg' {
   interface IController {
+    clinic: ExportClinic;
     public: ExportPublic;
   }
 }
