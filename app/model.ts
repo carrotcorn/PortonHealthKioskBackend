@@ -33,7 +33,8 @@ export interface IAppointment extends mongoose.Document {
     company: string,
     policyNumber: string
   },
-  clinicId: string
+  clinicId: string,
+  checkedIn?: Date
 }
 
 export const Appointment = mongoose.model<IAppointment>('Appointment', new mongoose.Schema({
@@ -55,7 +56,8 @@ export const Appointment = mongoose.model<IAppointment>('Appointment', new mongo
     company: { type: String, required: true },
     policyNumber: { type: String, required: true }
   }),
-  clinicId: { type: mongoose.Schema.Types.ObjectId, required: true }
+  clinicId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  checkedIn: Date
 }))
 
 export interface IClinic extends mongoose.Document {

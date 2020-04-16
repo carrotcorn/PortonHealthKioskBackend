@@ -8,7 +8,7 @@ export default class ClinicService extends DataService {
     return appointment.save()
   }
 
-  public async updateAppointment (conditions: MongooseFilterQuery<Pick<IAppointment, '_id' | 'familyName' | 'givenName' | 'age' | 'time' | 'address' | 'phone' | 'email' | 'insurance'>>, doc: IAppointment) {
+  public async updateAppointment (conditions: MongooseFilterQuery<Pick<IAppointment, '_id' | 'familyName' | 'givenName' | 'age' | 'time' | 'address' | 'phone' | 'email' | 'insurance' | 'clinicId' | 'checkedIn'>>, doc: IAppointment) {
     return Appointment.update(conditions, doc).exec()
   }
 

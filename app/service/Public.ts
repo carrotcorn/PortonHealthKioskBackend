@@ -7,7 +7,11 @@ export default class PublicService extends DataService {
     return Clinic.find(conditions).exec()
   }
 
-  public async findAppointments (conditions: MongooseFilterQuery<Pick<IAppointment, '_id' | 'familyName' | 'givenName' | 'age' | 'time' | 'address' | 'phone' | 'email' | 'insurance'>>) {
+  public async findAppointments (conditions: MongooseFilterQuery<Pick<IAppointment, '_id' | 'familyName' | 'givenName' | 'age' | 'time' | 'address' | 'phone' | 'email' | 'insurance' | 'clinicId' | 'checkedIn'>>) {
     return Appointment.find(conditions).exec()
+  }
+
+  public async checkinAppointment (conditions: MongooseFilterQuery<Pick<IAppointment, '_id' | 'familyName' | 'givenName' | 'age' | 'time' | 'address' | 'phone' | 'email' | 'insurance' | 'clinicId' | 'checkedIn'>>) {
+    return Appointment.findOneAndUpdate(conditions, { checkedIn: new Date() }).exec()
   }
 }
