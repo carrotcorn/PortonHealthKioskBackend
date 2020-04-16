@@ -3,8 +3,9 @@ import DataService from './DataService'
 import { MongooseFilterQuery } from 'mongoose'
 
 export default class ClinicService extends DataService {
-  public async findAppointments (conditions: MongooseFilterQuery<Pick<IAppointment, '_id' | 'familyName' | 'givenName' | 'age' | 'time' | 'address' | 'phone' | 'email' | 'insurance'>>) {
-    return Appointment.find(conditions).exec()
+  public async createAppointment (doc: IAppointment) {
+    const appointment = new Appointment(doc)
+    return appointment.save()
   }
 
   public async updateAppointment (conditions: MongooseFilterQuery<Pick<IAppointment, '_id' | 'familyName' | 'givenName' | 'age' | 'time' | 'address' | 'phone' | 'email' | 'insurance'>>, doc: IAppointment) {
