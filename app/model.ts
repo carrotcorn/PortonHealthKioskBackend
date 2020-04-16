@@ -75,3 +75,15 @@ export const Clinic = mongoose.model<IClinic>('Clinic', new mongoose.Schema({
   address: { type: Address, required: true },
   ownerId: { type: mongoose.Schema.Types.ObjectId, required: true }
 }))
+
+export interface IUser extends mongoose.Document {
+  username: string
+  password: string
+  roles: string[]
+}
+
+export const User = mongoose.model<IUser>('User', new mongoose.Schema({
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  roles: [{ type: String }]
+}))
