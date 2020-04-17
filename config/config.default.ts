@@ -20,11 +20,11 @@ export default (appInfo: EggAppInfo) => {
   const bizConfig = {
     onerror: {
       json (err, ctx: Context) {
-        ctx.body = { success: false, error: err }
+        ctx.body = { success: false, error: err.message }
         ctx.status = 500
       }
     },
-    sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`
+    salt: '1361e9e7-0cea-4d20-bda4-0af234c175d6'
   }
 
   // the return config will combines to EggAppConfig

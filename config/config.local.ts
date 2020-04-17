@@ -4,6 +4,6 @@ export default () => {
   const config: PowerPartial<EggAppConfig> = {}
   return {
     ...config,
-    connectionString: 'mongodb://localhost'
+    connectionString: 'mongodb://localhost/test'
   }
 }
