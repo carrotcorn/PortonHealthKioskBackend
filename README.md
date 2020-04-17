@@ -2,6 +2,44 @@
 
 Backend for Porton Health Kiosk
 
+## API Endpoints
+
+    post /clinic/appointment/create
+    get /public/appointment/find
+    post /public/appointment/find
+    post /public/appointment/checkin
+    put /clinic/appointment/update
+
+    get /public/clinic/find
+    post /public/clinic/find
+    post /clinic/clinic/create
+    put /clinic/clinic/update
+
+    post /user/account/create
+    get /user/account/find
+    post /user/account/find
+    put /user/account/update
+    post /user/login
+
+## How to call
+
+Make requests to those API endpoints, it will tell you what data is needed.
+
+Some endpoints require that you're logged in and your account has a specific role.
+
+If you use tools like postman to test the API, save the cookie from post /user/login, then attach it to the header of subsequent requests.
+
+    Cookie: EGG_SESS=ExampleCookie
+
+To bypass authentication (super user mode), add key: 'd88b8076-3c3f-41cf-9fc3-ca3e923c009a' to the request body.
+
+    put /user/account/update
+    {
+      condition: { username: 'example' },
+      doc: { password: 'password' },
+      key: 'd88b8076-3c3f-41cf-9fc3-ca3e923c009a'
+    }
+
 ## QuickStart
 
 ### Development
