@@ -79,11 +79,11 @@ export const Clinic = mongoose.model<IClinic>('Clinic', new mongoose.Schema({
 export interface IUser extends mongoose.Document {
   username: string
   password: string
-  roles: string[]
+  roles?: string[]
 }
 
 export const User = mongoose.model<IUser>('User', new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
-  roles: [{ type: String }]
+  roles: [String]
 }))
