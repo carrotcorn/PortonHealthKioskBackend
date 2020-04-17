@@ -20,7 +20,13 @@ export default (appInfo: EggAppInfo) => {
   const bizConfig = {
     onerror: {
       json (err, ctx: Context) {
-        ctx.body = { success: false, error: err.message }
+        ctx.body = {
+          success: false,
+          error: {
+            message: err.message,
+            errors: err.errors
+          }
+        }
         ctx.status = 500
       }
     },
