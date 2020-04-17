@@ -35,7 +35,7 @@ To bypass authentication (super user mode), add key: 'd88b8076-3c3f-41cf-9fc3-ca
 
     put /user/account/update
     {
-      condition: { username: 'example' },
+      conditions: { username: 'example' },
       doc: { password: 'password' },
       key: 'd88b8076-3c3f-41cf-9fc3-ca3e923c009a'
     }
