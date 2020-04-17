@@ -24,7 +24,8 @@ export default (appInfo: EggAppInfo) => {
         ctx.status = 500
       }
     },
-    salt: '1361e9e7-0cea-4d20-bda4-0af234c175d6'
+    salt: '1361e9e7-0cea-4d20-bda4-0af234c175d6',
+    key: 'd88b8076-3c3f-41cf-9fc3-ca3e923c009a'
   }
 
   // the return config will combines to EggAppConfig
