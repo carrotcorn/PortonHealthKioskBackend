@@ -1,10 +1,10 @@
 import { IUser, User } from '../model'
 import { MongooseFilterQuery } from 'mongoose'
 import * as crypto from 'crypto'
-import DataService from './DataService'
 import { authenticated } from '../util'
+import { Service } from 'egg'
 
-export default class UserService extends DataService {
+export default class UserService extends Service {
   @authenticated('admin')
   public async findUsers (conditions: MongooseFilterQuery<Pick<IUser, '_id' | 'username' | 'password' | 'roles'>>) {
     return User.find(conditions)

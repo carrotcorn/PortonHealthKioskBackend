@@ -1,9 +1,9 @@
 import { IAppointment, Appointment, IClinic, Clinic } from '../model'
-import DataService from './DataService'
 import { MongooseFilterQuery } from 'mongoose'
 import { authenticated } from '../util'
+import { Service } from 'egg'
 
-export default class ClinicService extends DataService {
+export default class ClinicService extends Service {
   @authenticated('clinic')
   public async createAppointment (doc: IAppointment) {
     const appointment = new Appointment(doc)

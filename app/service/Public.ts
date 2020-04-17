@@ -1,8 +1,8 @@
 import { IAppointment, Appointment, IClinic, Clinic } from '../model'
-import DataService from './DataService'
 import { MongooseFilterQuery } from 'mongoose'
+import { Service } from 'egg'
 
-export default class PublicService extends DataService {
+export default class PublicService extends Service {
   public async findClinics (conditions: MongooseFilterQuery<Pick<IClinic, 'address' | 'phone' | 'email' | 'name' | 'ownerId'>>) {
     return Clinic.find(conditions).exec()
   }
