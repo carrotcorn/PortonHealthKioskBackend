@@ -20,6 +20,7 @@ Backend for Porton Health Kiosk
     post /user/account/find
     put /user/account/update
     post /user/login
+    post /user/logout
 
 ## How to call
 

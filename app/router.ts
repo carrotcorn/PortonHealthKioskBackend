@@ -19,4 +19,5 @@ export default (app: Application) => {
   router.post('/user/account/find', controller.user.findUsers)
   router.put('/user/account/update', controller.user.updateUser)
   router.post('/user/login', controller.user.logIn)
+  router.post('/user/logout', controller.user.logOut)
 }

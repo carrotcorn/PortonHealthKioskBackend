@@ -50,6 +50,11 @@ export default class UserService extends Service {
     }
   }
 
+  @authenticated()
+  public async logOut () {
+    this.ctx.session = null
+  }
+
   public getPasswordHash (password: string): string {
     return crypto.createHash('sha256').update(password + this.config.salt).digest('hex')
   }
