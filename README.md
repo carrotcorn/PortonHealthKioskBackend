@@ -28,7 +28,26 @@ Make requests to those API endpoints, it will tell you what data is needed.
 
 Some endpoints require that you're logged in and your account has a specific role.
 
+If a request body is attached, specify its type in the request header. For example: content-type: application/json
+
+If expecting a json response, add header accept: application/json
+
 ## Authentication
+
+### Login
+
+post /user/login with user credentials, the browser will remember the login session.
+
+Example login request:
+
+    post /user/login
+    accept: application/json
+    content-type: application/json
+    x-csrf-token: 68jP4JZdL7ByskPSO0EXbEG4
+    {
+      username: 'example',
+      password: 'password'
+    }
 
 ### CSRF
 
