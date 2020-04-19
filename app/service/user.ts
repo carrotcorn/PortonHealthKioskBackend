@@ -52,7 +52,7 @@ export default class UserService extends Service {
 
   @authenticated()
   public async logOut () {
-    this.ctx.session = null
+    this.ctx.session.user = null
   }
 
   public getPasswordHash (password: string): string {

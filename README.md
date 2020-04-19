@@ -28,9 +28,47 @@ Make requests to those API endpoints, it will tell you what data is needed.
 
 Some endpoints require that you're logged in and your account has a specific role.
 
+## Authentication
+
+### CSRF
+
+If you don't have a CSRF token, you can get it by sending a request to get /csrf.
+
+    > GET /csrf HTTP/1.1
+    < HTTP/1.1 200 OK
+    {"success":true,"result":"68jP4JZdL7ByskPSO0EXbEG4"}
+
+All requests other than GET requests must attach CSRF token to prevent CSRF attacks.
+
+The CSRF token can be attached as x-csrf-token header, _csrf in the request body, or in the url query.
+
+Example valid requests:
+
+    put /user/account/update
+    x-csrf-token: 68jP4JZdL7ByskPSO0EXbEG4
+    {
+      conditions: { username: 'example' },
+      doc: { password: 'password' }
+    }
+
+    put /user/account/update
+    {
+      conditions: { username: 'example' },
+      doc: { password: 'password' }
+      _csrf: '68jP4JZdL7ByskPSO0EXbEG4'
+    }
+
+    put /user/account/update?_csrf=68jP4JZdL7ByskPSO0EXbEG4
+    {
+      conditions: { username: 'example' },
+      doc: { password: 'password' }
+    }
+
+### Testing
+
 If you use tools like postman to test the API, save the cookie from post /user/login, then attach it to the header of subsequent requests.
 
-    Cookie: EGG_SESS=ExampleCookie
+    Cookie: EGG_SESS=ExampleCookie; csrfToken=68jP4JZdL7ByskPSO0EXbEG4
 
 To bypass authentication (super user mode), add key: 'd88b8076-3c3f-41cf-9fc3-ca3e923c009a' to the request body.
 

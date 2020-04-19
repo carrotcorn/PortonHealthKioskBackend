@@ -10,6 +10,12 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = []
 
+  config.security = {
+    csrf: {
+      useSession: true
+    }
+  }
+
   // add your special config in here
   const bizConfig = {
     onerror: {

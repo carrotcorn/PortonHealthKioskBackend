@@ -3,6 +3,9 @@ import { Application } from 'egg'
 export default (app: Application) => {
   const { controller, router } = app
 
+  router.get('/', controller.public.index)
+  router.get('/csrf', controller.public.csrf)
+
   router.post('/clinic/appointment/create', controller.clinic.createAppointment)
   router.get('/public/appointment/find', controller.public.findAppointments)
   router.post('/public/appointment/find', controller.public.findAppointments)
