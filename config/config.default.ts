@@ -16,6 +16,10 @@ export default (appInfo: EggAppInfo) => {
     }
   }
 
+  config.cors = {
+    credentials: true
+  }
+
   // add your special config in here
   const bizConfig = {
     onerror: {
