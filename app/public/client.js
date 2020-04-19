@@ -1,4 +1,4 @@
-class Backend {
+class Backend { // eslint-disable-line no-unused-vars
   constructor (base) {
     if (base.endsWith('/')) {
       base = base.substr(0, base.length - 1)
@@ -7,7 +7,8 @@ class Backend {
   }
 
   async call (method, path, body) {
-    const csrf = await window.fetch(this.base + '/csrf').then(x => x.json()).then(x => x.result)
+    body = JSON.stringify(body)
+    const csrf = await window.fetch(this.base + '/csrf', { credentials: 'include' }).then(x => x.json()).then(x => x.result)
     return window.fetch(this.base + path, {
       credentials: 'include',
       headers: {
