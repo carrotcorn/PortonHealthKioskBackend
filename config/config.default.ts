@@ -12,7 +12,7 @@ export default (appInfo: EggAppInfo) => {
 
   config.security = {
     csrf: {
-      enable: false
+      useSession: true
     }
   }
 

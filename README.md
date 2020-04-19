@@ -4,6 +4,8 @@ Backend for Porton Health Kiosk
 
 ## API Endpoints
 
+    get /csrf
+
     post /clinic/appointment/create
     get /public/appointment/find
     post /public/appointment/find
@@ -21,6 +23,7 @@ Backend for Porton Health Kiosk
     put /user/account/update
     post /user/login
     post /user/logout
+    get /user/current
 
 ## How to call
 
@@ -28,9 +31,66 @@ Make requests to those API endpoints, it will tell you what data is needed.
 
 Some endpoints require that you're logged in and your account has a specific role.
 
+If a request body is attached, specify its type in the request header. For example: content-type: application/json
+
+If expecting a json response, add header accept: application/json
+
+## Authentication
+
+### Login
+
+post /user/login with user credentials, the browser will remember the login session.
+
+Example login request:
+
+    post /user/login
+    accept: application/json
+    content-type: application/json
+    x-csrf-token: 68jP4JZdL7ByskPSO0EXbEG4
+    {
+      username: 'example',
+      password: 'password'
+    }
+
+### CSRF
+
+If you don't have a CSRF token, you can get it by sending a request to get /csrf.
+
+    > GET /csrf HTTP/1.1
+    < HTTP/1.1 200 OK
+    {"success":true,"result":"68jP4JZdL7ByskPSO0EXbEG4"}
+
+All requests other than GET requests must attach CSRF token to prevent CSRF attacks.
+
+The CSRF token can be attached as x-csrf-token header, _csrf in the request body, or in the url query.
+
+Example valid requests:
+
+    put /user/account/update
+    x-csrf-token: 68jP4JZdL7ByskPSO0EXbEG4
+    {
+      conditions: { username: 'example' },
+      doc: { password: 'password' }
+    }
+
+    put /user/account/update
+    {
+      conditions: { username: 'example' },
+      doc: { password: 'password' }
+      _csrf: '68jP4JZdL7ByskPSO0EXbEG4'
+    }
+
+    put /user/account/update?_csrf=68jP4JZdL7ByskPSO0EXbEG4
+    {
+      conditions: { username: 'example' },
+      doc: { password: 'password' }
+    }
+
+### Testing
+
 If you use tools like postman to test the API, save the cookie from post /user/login, then attach it to the header of subsequent requests.
 
-    Cookie: EGG_SESS=ExampleCookie
+    Cookie: EGG_SESS=ExampleCookie; csrfToken=68jP4JZdL7ByskPSO0EXbEG4
 
 To bypass authentication (super user mode), add key: 'd88b8076-3c3f-41cf-9fc3-ca3e923c009a' to the request body.
 
