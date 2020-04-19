@@ -31,6 +31,27 @@ Make requests to those API endpoints, it will tell you what data is needed.
 
 Some endpoints require that you're logged in and your account has a specific role.
 
+1. Add reference to the client script (assuming that the api server is running at http://localhost:7001/)
+
+        <script src="http://localhost:7001/public/client.js"></script>
+
+2. Make an instance of the client
+
+        const backend = new Backend('http://localhost:7001')
+
+3. Send requests and use the result
+
+        await backend.post('/user/login', {
+          username: 'example',
+          password: 'password'
+        })
+
+        const user = await backend.get('/user/current').result
+    
+        console.log(user)
+
+### Notes for manual requests
+
 If a request body is attached, specify its type in the request header. For example: content-type: application/json
 
 If expecting a json response, add header accept: application/json
