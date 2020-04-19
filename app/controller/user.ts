@@ -28,4 +28,9 @@ export default class UserController extends Controller {
     const result = await this.userService.logOut()
     this.ctx.body = { success: true, result }
   }
+
+  public async currentUser () {
+    const result = await this.userService.currentUser()
+    this.ctx.body = { success: true, result }
+  }
 }

@@ -55,6 +55,11 @@ export default class UserService extends Service {
     this.ctx.session.user = null
   }
 
+  @authenticated()
+  public async currentUser () {
+    return this.ctx.session.user
+  }
+
   public getPasswordHash (password: string): string {
     return crypto.createHash('sha256').update(password + this.config.salt).digest('hex')
   }

@@ -4,6 +4,8 @@ Backend for Porton Health Kiosk
 
 ## API Endpoints
 
+    get /csrf
+
     post /clinic/appointment/create
     get /public/appointment/find
     post /public/appointment/find
@@ -21,6 +23,7 @@ Backend for Porton Health Kiosk
     put /user/account/update
     post /user/login
     post /user/logout
+    get /user/current
 
 ## How to call
 
