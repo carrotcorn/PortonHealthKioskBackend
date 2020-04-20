@@ -1,8 +1,8 @@
 import { IUser, User } from '../model'
 import { MongooseFilterQuery } from 'mongoose'
-import * as crypto from 'crypto'
 import { authenticated } from '../util'
 import { Service } from 'egg'
+import { sm3 } from 'sm-crypto'
 
 export default class UserService extends Service {
   @authenticated('admin')
@@ -61,6 +61,6 @@ export default class UserService extends Service {
   }
 
   public getPasswordHash (password: string): string {
-    return crypto.createHash('sha256').update(password + this.config.salt).digest('hex')
+    return sm3(password + this.config.salt)
   }
 }
