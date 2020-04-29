@@ -1,4 +1,4 @@
-import { IAppointment, Appointment, IClinic, Clinic } from '../model'
+import { IAppointment, Appointment, IClinic, Clinic, Doctor, IDoctor } from '../model'
 import { MongooseFilterQuery } from 'mongoose'
 import { Service } from 'egg'
 
@@ -13,5 +13,9 @@ export default class PublicService extends Service {
 
   public async checkinAppointment (conditions: MongooseFilterQuery<Pick<IAppointment, '_id' | 'familyName' | 'givenName' | 'age' | 'time' | 'address' | 'phone' | 'email' | 'insurance' | 'clinicId' | 'checkedIn'>>) {
     return Appointment.findOneAndUpdate(conditions, { checkedIn: new Date() }).exec()
+  }
+
+  public async findDoctors (conditions: MongooseFilterQuery<Pick<IDoctor, 'phone' | 'email' | '_id' | 'doctorname'>>) {
+    return Doctor.find(conditions).exec()
   }
 }

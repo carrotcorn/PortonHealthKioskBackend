@@ -1,4 +1,4 @@
-import { IAppointment, Appointment, IClinic, Clinic } from '../model'
+import { IAppointment, Appointment, IClinic, Clinic, IDoctor, Doctor } from '../model'
 import { MongooseFilterQuery } from 'mongoose'
 import { authenticated } from '../util'
 import { Service } from 'egg'
@@ -24,5 +24,16 @@ export default class ClinicService extends Service {
   @authenticated('admin')
   public async updateClinic (conditions: MongooseFilterQuery<Pick<IClinic, 'address' | 'phone' | 'email' | 'name' | 'ownerId'>>, doc: IClinic) {
     return Clinic.update(conditions, doc).exec()
+  }
+
+  @authenticated('clinic')
+  public async createDoctor (doc: IDoctor) {
+    const doctor = new Doctor(doc)
+    return doctor.save()
+  }
+
+  @authenticated('clinic')
+  public async updateDoctor (conditions: MongooseFilterQuery<Pick<IDoctor, 'phone' | 'email' | '_id' | 'doctorname'>>, doc: IAppointment) {
+    return Doctor.update(conditions, doc).exec()
   }
 }
