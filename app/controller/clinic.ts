@@ -23,4 +23,14 @@ export default class ClinicController extends Controller {
     const result = await this.clinicService.updateClinic(this.ctx.request.body.conditions, this.ctx.request.body.doc)
     this.ctx.body = { success: true, result }
   }
+
+  public async createDoctor () {
+    const result = await this.clinicService.createDoctor(this.ctx.request.body)
+    this.ctx.body = { success: true, result }
+  }
+
+  public async updateDoctor () {
+    const result = await this.clinicService.updateDoctor(this.ctx.request.body.conditions, this.ctx.request.body.doc)
+    this.ctx.body = { success: true, result }
+  }
 }

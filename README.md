@@ -17,6 +17,11 @@ Backend for Porton Health Kiosk
     post /clinic/clinic/create
     put /clinic/clinic/update
 
+    get /public/doctor/find
+    post /public/doctor/find
+    post /clinic/doctor/create
+    put /clinic/doctor/update
+
     post /user/account/create
     get /user/account/find
     post /user/account/find

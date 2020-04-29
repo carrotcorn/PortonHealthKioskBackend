@@ -26,4 +26,9 @@ export default class PublicController extends Controller {
     const result = await this.publicService.checkinAppointment(this.ctx.request.body.conditions)
     this.ctx.body = { success: true, result }
   }
+
+  public async findDoctors () {
+    const result = await this.publicService.findDoctors(this.ctx.request.body.conditions)
+    this.ctx.body = { success: true, result }
+  }
 }

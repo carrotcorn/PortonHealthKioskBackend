@@ -17,6 +17,11 @@ export default (app: Application) => {
   router.post('/clinic/clinic/create', controller.clinic.createClinic)
   router.put('/clinic/clinic/update', controller.clinic.createClinic)
 
+  router.get('/public/doctor/find', controller.public.findDoctors)
+  router.post('/public/doctor/find', controller.public.findDoctors)
+  router.post('/clinic/doctor/create', controller.clinic.createDoctor)
+  router.put('/clinic/doctor/update', controller.clinic.createDoctor)
+
   router.post('/user/account/create', controller.user.createUser)
   router.get('/user/account/find', controller.user.findUsers)
   router.post('/user/account/find', controller.user.findUsers)

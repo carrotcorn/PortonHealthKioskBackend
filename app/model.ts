@@ -87,3 +87,15 @@ export const User = mongoose.model<IUser>('User', new mongoose.Schema({
   password: { type: String, required: true },
   roles: [String]
 }))
+
+export interface IDoctor extends mongoose.Document {
+  doctorname: string;
+  phone: string;
+  email: string;
+}
+
+export const Doctor = mongoose.model<IDoctor>('Doctor', new mongoose.Schema({
+  doctorname: { type: String, required: true },
+  phone: { type: String, required: true },
+  email: { type: String, required: true }
+}))
