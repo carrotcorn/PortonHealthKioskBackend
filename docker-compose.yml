@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    container_name: egg-api
+    restart: always
+    build: .
+    ports:
+      - '7001:7001'
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: mongo
+    image: mongo:4.1.6
+    ports:
+      - '27017:27017'
