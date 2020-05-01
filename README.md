@@ -30,6 +30,82 @@ Backend for Porton Health Kiosk
     post /user/logout
     get /user/current
 
+## How to create the first user
+
+Call /user/create with key: 'd88b8076-3c3f-41cf-9fc3-ca3e923c009a' in the request body.
+For example:
+
+    {"username":"example","password":"********","key":"d88b8076-3c3f-41cf-9fc3-ca3e923c009a"}
+
+## Data Models
+
+### Notes
+
+- Any fields ending with '?' are optional
+- Appointment.checkedIn should be undefined if the patient is not checked in, or the check in time if the patient is checked in
+
+### Address
+
+    street: string
+    street2?: string
+    city: string
+    province?: string
+    country: string
+    postcode?: string
+
+### Appointment
+
+    patientId: string
+    clinicId: string
+    doctorId: string
+    time: {
+      start: Date
+      end: Date
+    }
+    checkedIn?: Date
+
+### CheckInFormField
+
+    inputType: string
+    name: string
+    label: string
+
+### Clinic
+
+    name: string
+    phone: string
+    email?: string
+    address: IAddress
+    ownerId: string
+    formFields: ICheckInFormField[]
+
+### Doctor
+
+    doctorname: string
+    phone: string
+    email: string
+
+### Patient
+
+    familyName: string
+    givenName: string
+    age: Number
+    address: IAddress
+    phone: string
+    email?: string
+    healthId?: string
+    insurance?: {
+      company: string
+      policyNumber: string
+    }
+
+### User
+
+    username: string
+    password: string
+    roles?: string[]
+    disabled?: boolean
+
 ## How to call
 
 Make requests to those API endpoints, it will tell you what data is needed.

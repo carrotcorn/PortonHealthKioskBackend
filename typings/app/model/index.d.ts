@@ -7,6 +7,7 @@ import ExportAppointment from '../../../app/model/appointment';
 import ExportCheckinformfield from '../../../app/model/checkinformfield';
 import ExportClinic from '../../../app/model/clinic';
 import ExportDoctor from '../../../app/model/doctor';
+import ExportPatient from '../../../app/model/patient';
 import ExportUser from '../../../app/model/user';
 
 declare module 'egg' {
@@ -16,6 +17,7 @@ declare module 'egg' {
     Checkinformfield: ReturnType<typeof ExportCheckinformfield>;
     Clinic: ReturnType<typeof ExportClinic>;
     Doctor: ReturnType<typeof ExportDoctor>;
+    Patient: ReturnType<typeof ExportPatient>;
     User: ReturnType<typeof ExportUser>;
   }
 }
