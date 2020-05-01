@@ -6,26 +6,26 @@ Backend for Porton Health Kiosk
 
     get /csrf
 
-    post /clinic/appointment/create
-    get /public/appointment/find
-    post /public/appointment/find
-    post /public/appointment/checkin
-    put /clinic/appointment/update
+    post /appointment/create
+    get /appointment/find
+    post /appointment/find
+    post /appointment/checkin
+    put /appointment/update
 
-    get /public/clinic/find
-    post /public/clinic/find
-    post /clinic/clinic/create
-    put /clinic/clinic/update
+    get /clinic/find
+    post /clinic/find
+    post /clinic/create
+    put /clinic/update
 
-    get /public/doctor/find
-    post /public/doctor/find
-    post /clinic/doctor/create
-    put /clinic/doctor/update
+    get /doctor/find
+    post /doctor/find
+    post /doctor/create
+    put /doctor/update
 
-    post /user/account/create
-    get /user/account/find
-    post /user/account/find
-    put /user/account/update
+    post /user/create
+    get /user/find
+    post /user/find
+    put /user/update
     post /user/login
     post /user/logout
     get /user/current
