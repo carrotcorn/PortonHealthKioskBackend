@@ -9,7 +9,6 @@ export default class PublicController extends Controller {
   }
 
   public async csrf () {
-    console.log(this.app.config)
     this.ctx.body = { success: true, result: this.ctx.csrf }
   }
 
