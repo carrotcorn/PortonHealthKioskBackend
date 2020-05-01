@@ -173,21 +173,21 @@ The CSRF token can be attached as x-csrf-token header, _csrf in the request body
 
 Example valid requests:
 
-    put /user/account/update
+    put /user/update
     x-csrf-token: 68jP4JZdL7ByskPSO0EXbEG4
     {
       conditions: { username: 'example' },
       doc: { password: 'password' }
     }
 
-    put /user/account/update
+    put /user/update
     {
       conditions: { username: 'example' },
       doc: { password: 'password' }
       _csrf: '68jP4JZdL7ByskPSO0EXbEG4'
     }
 
-    put /user/account/update?_csrf=68jP4JZdL7ByskPSO0EXbEG4
+    put /user/update?_csrf=68jP4JZdL7ByskPSO0EXbEG4
     {
       conditions: { username: 'example' },
       doc: { password: 'password' }
@@ -201,7 +201,7 @@ If you use tools like postman to test the API, save the cookie from post /user/l
 
 To bypass authentication (super user mode), add key: 'd88b8076-3c3f-41cf-9fc3-ca3e923c009a' to the request body.
 
-    put /user/account/update
+    put /user/update
     {
       conditions: { username: 'example' },
       doc: { password: 'password' },
@@ -209,6 +209,10 @@ To bypass authentication (super user mode), add key: 'd88b8076-3c3f-41cf-9fc3-ca
     }
 
 ## QuickStart
+
+```bash
+$ docker-compose up
+```
 
 ### Development
 
@@ -224,7 +228,7 @@ Don't tsc compile at development mode, if you had run `tsc` then you need to `np
 
 ```bash
 $ npm run tsc
-$ npm start
+$ EGG_SERVER_DB_URI=mongodb://DB_CONNECTION_STRING npm start
 ```
 
 ### Npm Scripts
