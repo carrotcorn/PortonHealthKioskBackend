@@ -1,4 +1,4 @@
-import { IUser, User } from '../model'
+import { IUser, User } from '../model/user'
 import { MongooseFilterQuery } from 'mongoose'
 import { authenticated } from '../util'
 import { Service } from 'egg'

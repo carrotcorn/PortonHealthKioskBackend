@@ -1,4 +1,4 @@
-import { User, IUser } from './model'
+import { User, IUser } from './model/user'
 import { BaseContextClass, Context, EggAppConfig } from 'egg'
 
 export function authenticated (role?: string) {

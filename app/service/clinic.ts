@@ -1,4 +1,6 @@
-import { IAppointment, Appointment, IClinic, Clinic, IDoctor, Doctor } from '../model'
+import { IAppointment, Appointment } from '../model/appointment'
+import { IClinic, Clinic } from '../model/clinic'
+import { IDoctor, Doctor } from '../model/doctor'
 import { MongooseFilterQuery } from 'mongoose'
 import { authenticated } from '../util'
 import { Service } from 'egg'
