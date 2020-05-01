@@ -9,7 +9,7 @@ export interface IAddress {
   postcode?: string
 }
 
-export const Address = new mongoose.Schema({
+export const Address = new mongoose.Schema<IAddress>({
   street: { type: String, required: true },
   street2: String,
   city: { type: String, required: true },
@@ -60,6 +60,18 @@ export const Appointment = mongoose.model<IAppointment>('Appointment', new mongo
   checkedIn: Date
 }))
 
+export interface ICheckInFormField {
+  inputType: string,
+  name: string,
+  label: string
+}
+
+export const CheckInFormField = new mongoose.Schema<ICheckInFormField>({
+  inputType: { type: String, required: true },
+  name: { type: String, required: true },
+  label: { type: String, required: true }
+})
+
 export interface IClinic extends mongoose.Document {
   name: string
   phone: string
@@ -73,7 +85,8 @@ export const Clinic = mongoose.model<IClinic>('Clinic', new mongoose.Schema({
   phone: { type: String, required: true },
   email: String,
   address: { type: Address, required: true },
-  ownerId: { type: mongoose.Schema.Types.ObjectId, required: true }
+  ownerId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  formFields: [CheckInFormField]
 }))
 
 export interface IUser extends mongoose.Document {
