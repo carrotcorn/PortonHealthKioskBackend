@@ -1,29 +1,22 @@
 import * as mongoose from 'mongoose'
-import { IAddress, Address } from './address'
+
+export type AppointmentQuery = mongoose.MongooseFilterQuery<Pick<IAppointment, '_id' | 'patientId' | 'clinicId' | 'doctorId' | 'time' | 'checkedIn'>>
 
 export interface IAppointment extends mongoose.Document {
-  familyName: string
-  givenName: string
-  age: Number
+  patientId: string
+  clinicId: string
+  doctorId: string
   time: {
-    start: Date,
+    start: Date
     end: Date
   }
-  address: IAddress
-  phone: string
-  email?: string
-  insurance?: {
-    company: string,
-    policyNumber: string
-  },
-  clinicId: string,
   checkedIn?: Date
 }
 
 export const Appointment = mongoose.model<IAppointment>('Appointment', new mongoose.Schema({
-  familyName: { type: String, required: true },
-  givenName: { type: String, required: true },
-  age: { type: Number, required: true },
+  patientId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  clinicId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  doctorId: { type: mongoose.Schema.Types.ObjectId, required: true },
   time: {
     type: new mongoose.Schema({
       start: { type: Date, required: true },
@@ -31,14 +24,5 @@ export const Appointment = mongoose.model<IAppointment>('Appointment', new mongo
     }),
     required: true
   },
-  address: { type: Address, required: true },
-  phone: { type: String, required: true },
-  email: String,
-  healthId: String,
-  insurance: new mongoose.Schema({
-    company: { type: String, required: true },
-    policyNumber: { type: String, required: true }
-  }),
-  clinicId: { type: mongoose.Schema.Types.ObjectId, required: true },
   checkedIn: Date
 }))

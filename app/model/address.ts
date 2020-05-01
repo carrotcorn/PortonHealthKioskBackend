@@ -1,11 +1,11 @@
 import * as mongoose from 'mongoose'
 
 export interface IAddress {
-  street: string,
-  street2?: string,
-  city: string,
-  province?: string,
-  country: string,
+  street: string
+  street2?: string
+  city: string
+  province?: string
+  country: string
   postcode?: string
 }
 

@@ -6,29 +6,105 @@ Backend for Porton Health Kiosk
 
     get /csrf
 
-    post /clinic/appointment/create
-    get /public/appointment/find
-    post /public/appointment/find
-    post /public/appointment/checkin
-    put /clinic/appointment/update
+    post /appointment/create
+    get /appointment/find
+    post /appointment/find
+    post /appointment/checkin
+    put /appointment/update
 
-    get /public/clinic/find
-    post /public/clinic/find
-    post /clinic/clinic/create
-    put /clinic/clinic/update
+    get /clinic/find
+    post /clinic/find
+    post /clinic/create
+    put /clinic/update
 
-    get /public/doctor/find
-    post /public/doctor/find
-    post /clinic/doctor/create
-    put /clinic/doctor/update
+    get /doctor/find
+    post /doctor/find
+    post /doctor/create
+    put /doctor/update
 
-    post /user/account/create
-    get /user/account/find
-    post /user/account/find
-    put /user/account/update
+    post /user/create
+    get /user/find
+    post /user/find
+    put /user/update
     post /user/login
     post /user/logout
     get /user/current
+
+## How to create the first user
+
+Call /user/create with key: 'd88b8076-3c3f-41cf-9fc3-ca3e923c009a' in the request body.
+For example:
+
+    {"username":"example","password":"********","key":"d88b8076-3c3f-41cf-9fc3-ca3e923c009a"}
+
+## Data Models
+
+### Notes
+
+- Any fields ending with '?' are optional
+- Appointment.checkedIn should be undefined if the patient is not checked in, or the check in time if the patient is checked in
+
+### Address
+
+    street: string
+    street2?: string
+    city: string
+    province?: string
+    country: string
+    postcode?: string
+
+### Appointment
+
+    patientId: string
+    clinicId: string
+    doctorId: string
+    time: {
+      start: Date
+      end: Date
+    }
+    checkedIn?: Date
+
+### CheckInFormField
+
+    inputType: string
+    name: string
+    label: string
+
+### Clinic
+
+    name: string
+    phone: string
+    email?: string
+    address: IAddress
+    ownerId: string
+    formFields: ICheckInFormField[]
+
+### Doctor
+
+    doctorname: string
+    phone: string
+    email: string
+
+### Patient
+
+    familyName: string
+    givenName: string
+    age: Number
+    address: IAddress
+    phone: string
+    email?: string
+    healthId?: string
+    insurance?: {
+      company: string
+      policyNumber: string
+    }
+
+### User
+
+    username: string
+    password: string
+    roles?: string[]
+    disabled?: boolean
 
 ## How to call
 

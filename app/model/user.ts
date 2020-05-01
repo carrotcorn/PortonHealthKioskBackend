@@ -1,5 +1,7 @@
 import * as mongoose from 'mongoose'
 
+export type UserQuery = mongoose.MongooseFilterQuery<Pick<IUser, '_id' | 'username' | 'password' | 'roles' | 'disabled'>>
+
 export interface IUser extends mongoose.Document {
   username: string
   password: string

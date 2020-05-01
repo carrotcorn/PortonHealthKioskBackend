@@ -2,6 +2,8 @@ import * as mongoose from 'mongoose'
 import { ICheckInFormField, CheckInFormField } from './checkinformfield'
 import { IAddress, Address } from './address'
 
+export type ClinicQuery = mongoose.MongooseFilterQuery<Pick<IClinic, 'address' | 'phone' | 'email' | 'name' | 'ownerId'>>
+
 export interface IClinic extends mongoose.Document {
   name: string
   phone: string

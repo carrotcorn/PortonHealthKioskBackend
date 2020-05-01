@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose'
 
 export interface ICheckInFormField {
-  inputType: string,
-  name: string,
+  inputType: string
+  name: string
   label: string
 }
 

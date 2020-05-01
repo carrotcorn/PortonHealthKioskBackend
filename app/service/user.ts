@@ -1,12 +1,11 @@
-import { IUser, User } from '../model/user'
-import { MongooseFilterQuery } from 'mongoose'
+import { IUser, User, UserQuery } from '../model/user'
 import { authenticated } from '../util'
 import { Service } from 'egg'
 import { sm3 } from 'sm-crypto'
 
 export default class UserService extends Service {
   @authenticated('admin')
-  public async findUsers (conditions: MongooseFilterQuery<Pick<IUser, '_id' | 'username' | 'password' | 'roles' | 'disabled'>>) {
+  public async findUsers (conditions: UserQuery) {
     return User.find(conditions)
   }
 
@@ -23,7 +22,7 @@ export default class UserService extends Service {
   }
 
   @authenticated('admin')
-  public async updateUser (conditions: MongooseFilterQuery<Pick<IUser, '_id' | 'username' | 'password' | 'roles' | 'disabled'>>, doc: IUser) {
+  public async updateUser (conditions: UserQuery, doc: IUser) {
     if (doc.password) {
       doc.password = this.getPasswordHash(doc.password)
     }
