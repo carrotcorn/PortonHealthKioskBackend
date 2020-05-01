@@ -1,4 +1,4 @@
-import { IUser, User } from '../model'
+import { IUser, User } from '../model/user'
 import { MongooseFilterQuery } from 'mongoose'
 import { authenticated } from '../util'
 import { Service } from 'egg'
@@ -6,7 +6,7 @@ import { sm3 } from 'sm-crypto'
 
 export default class UserService extends Service {
   @authenticated('admin')
-  public async findUsers (conditions: MongooseFilterQuery<Pick<IUser, '_id' | 'username' | 'password' | 'roles'>>) {
+  public async findUsers (conditions: MongooseFilterQuery<Pick<IUser, '_id' | 'username' | 'password' | 'roles' | 'disabled'>>) {
     return User.find(conditions)
   }
 
@@ -23,7 +23,7 @@ export default class UserService extends Service {
   }
 
   @authenticated('admin')
-  public async updateUser (conditions: MongooseFilterQuery<Pick<IUser, '_id' | 'username' | 'password' | 'roles'>>, doc: IUser) {
+  public async updateUser (conditions: MongooseFilterQuery<Pick<IUser, '_id' | 'username' | 'password' | 'roles' | 'disabled'>>, doc: IUser) {
     if (doc.password) {
       doc.password = this.getPasswordHash(doc.password)
     }
@@ -41,6 +41,8 @@ export default class UserService extends Service {
     const result = await User.findOne(user)
     if (!result) {
       throw new ReferenceError('The user information does not match any in the database')
+    } else if (result.disabled) {
+      throw new Error('User account disabled')
     } else {
       if (!this.ctx.session) {
         this.ctx.session = {}
