@@ -1,5 +1,7 @@
 import * as mongoose from 'mongoose'
 
+export type AppointmentQuery = mongoose.MongooseFilterQuery<Pick<IAppointment, '_id' | 'patientId' | 'clinicId' | 'doctorId' | 'time' | 'checkedIn'>>
+
 export interface IAppointment extends mongoose.Document {
   patientId: string
   clinicId: string

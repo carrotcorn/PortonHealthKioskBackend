@@ -1,5 +1,7 @@
 import * as mongoose from 'mongoose'
 
+export type DoctorQuery = mongoose.MongooseFilterQuery<Pick<IDoctor, 'phone' | 'email' | '_id' | 'doctorname'>>
+
 export interface IDoctor extends mongoose.Document {
   doctorname: string
   phone: string
