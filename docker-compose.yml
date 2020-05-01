@@ -1,16 +1,18 @@
 version: '3'
 services:
   app:
-    container_name: egg-api
+    container_name: api
     restart: always
     build: .
     ports:
       - '7001:7001'
     depends_on:
       - mongo
+    environment: 
+      - EGG_SERVER_DB_URI=mongodb://db/test
 
   mongo:
-    container_name: mongo
+    container_name: db
     image: mongo:4.1.6
     ports:
       - '27017:27017'
