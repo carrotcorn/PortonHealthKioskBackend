@@ -1,29 +1,25 @@
 import { users } from './seed-data/users'
-import { User } from './model/user'
+import { User, IUser } from './model/user'
 import { EggAppConfig } from 'egg'
 import { sm3 } from 'sm-crypto'
-// import { Schema } from 'mongoose'
-// import { Clinic } from './model/clinic'
+import { Clinic, IClinic } from './model/clinic'
 import { clinics } from './seed-data/clinics'
-import { Patient } from './model/patient'
+import { Patient, IPatient } from './model/patient'
 import { patients } from './seed-data/patients'
-import { Doctor } from './model/doctor'
+import { Doctor, IDoctor } from './model/doctor'
 import { doctors } from './seed-data/doctors'
 import {
   InputType,
   inputName,
   inputLabel,
-  CheckInFormField
+  CheckInFormField,
+  ICheckInFormField
 } from './model/checkinformfield'
 
-export default async function seedDatabase (config: EggAppConfig) {
+export default async function seedDatabase(config: EggAppConfig) {
   const users = await seedUsers(config)
-  const checkInFormFields = seedCheckInFormFields()
-  // const clinics = await seedClinics(
-  //   users
-  //     .filter((user) => user.roles?.includes('clinic'))
-  //     .reduce((acc, curr) => ({ ...acc, [curr.username]: curr._id }), {})
-  // )
+  const checkInFormFields = await seedCheckInFormFields()
+  const clinics = await seedClinics(users, checkInFormFields)
   const patients = await seedPatients()
   const doctors = await seedDoctors()
   console.log(users, checkInFormFields, clinics, patients, doctors)
@@ -39,15 +35,30 @@ const seedUsers = async (config) => {
   )
 }
 
-// type idMap = { [key: string]: Schema.Types.ObjectId }
-// const seedClinics = async (admins: idMap) => {
-//   return Clinic.create(
-//     clinics.map((clinic) => ({
-//       ...clinic,
-//       ownerId: admins[clinic.ownerId]
-//     }))
-//   )
-// }
+const seedClinics = async (
+  users: IUser[],
+  checkInFormFields: ICheckInFormField[]
+) => {
+  const defaultFormFieldIds = checkInFormFields
+    .filter(
+      (field) =>
+        field.inputType === InputType.BIRTHDAY ||
+        field.inputType === InputType.LAST_NAME
+    )
+    .map((field) => field._id)
+
+  const clinicAdminUsernameToId = users
+    .filter((user) => user.roles?.includes('clinic'))
+    .reduce((acc, curr) => ({ ...acc, [curr.username]: curr._id }), {})
+
+  return Clinic.create(
+    clinics.map((clinic) => ({
+      ...clinic,
+      ownerId: clinicAdminUsernameToId[clinic.ownerId],
+      formFields: defaultFormFieldIds
+    }))
+  )
+}
 
 const seedPatients = async () => {
   return Patient.create(patients)
@@ -68,5 +79,14 @@ const seedCheckInFormFields = async () => {
     })
   }
 
-  CheckInFormField.create(inputFields)
+  return CheckInFormField.create(inputFields)
+}
+
+const seedAppointments = async (
+  patients: IPatient[],
+  clinics: IClinic[],
+  doctors: IDoctor[]
+) => {
+  for (const clinic of clinics) {
+  }
 }
