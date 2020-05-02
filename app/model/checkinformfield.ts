@@ -1,7 +1,17 @@
 import * as mongoose from 'mongoose'
 
+export enum InputType {
+  FIRST_NAME = 'FIRST_NAME',
+  LAST_NAME = 'LAST_NAME',
+  BIRTHDAY = 'BIRTHDAY',
+  STREET_ADDRESS = 'STREET_ADDRESS',
+  CITY = 'CITY',
+  PROVINCE = 'PROVINCE',
+  POSTAL_CODE = 'POSTAL_CODE'
+}
+
 export interface ICheckInFormField {
-  inputType: string
+  inputType: InputType
   name: string
   label: string
 }
