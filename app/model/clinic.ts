@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose'
-import { ICheckInFormField, CheckInFormField } from './checkinformfield'
 import { IAddress, Address } from './address'
 
 export type ClinicQuery = mongoose.MongooseFilterQuery<
@@ -12,7 +11,7 @@ export interface IClinic extends mongoose.Document {
   email?: string
   address: IAddress
   ownerId: string
-  formFields: ICheckInFormField[]
+  formFields: string[]
 }
 
 export const Clinic = mongoose.model<IClinic>(
@@ -23,6 +22,8 @@ export const Clinic = mongoose.model<IClinic>(
     email: String,
     address: { type: Address, required: true },
     ownerId: { type: mongoose.Schema.Types.ObjectId, required: true },
-    formFields: [CheckInFormField]
+    formFields: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'CheckInFormField' }
+    ]
   })
 )

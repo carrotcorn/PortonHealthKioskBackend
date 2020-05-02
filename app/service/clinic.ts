@@ -4,7 +4,7 @@ import { Service } from 'egg'
 
 export default class ClinicService extends Service {
   public async findClinics (conditions: ClinicQuery) {
-    return Clinic.find(conditions).exec()
+    return Clinic.find(conditions).populate('formFields').exec()
   }
 
   @authenticated('admin')
