@@ -21,9 +21,9 @@ export const Clinic = mongoose.model<IClinic>(
     phone: { type: String, required: true },
     email: String,
     address: { type: Address, required: true },
-    ownerId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     formFields: [
-      { type: mongoose.Schema.Types.ObjectId, ref: 'CheckInFormField' }
+      { type: mongoose.Schema.Types.ObjectId, ref: 'CheckInFormField', required: true }
     ]
   })
 )
