@@ -54,7 +54,7 @@ For example:
     street: string
     street2?: string
     city: string
-    province?: string
+    province?: Province
     country: string
     postcode?: string
 
@@ -71,7 +71,7 @@ For example:
 
 ### CheckInFormField
 
-    inputType: string
+    inputType: InputType
     name: string
     label: string
 
@@ -82,7 +82,7 @@ For example:
     email?: string
     address: IAddress
     ownerId: string
-    formFields: ICheckInFormField[]
+    formFields: string[]
 
 ### Doctor
 
@@ -94,7 +94,7 @@ For example:
 
     familyName: string
     givenName: string
-    age: Number
+    birthday: Date
     address: IAddress
     phone: string
     email?: string

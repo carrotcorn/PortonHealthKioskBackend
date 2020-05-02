@@ -10,6 +10,7 @@ import ExportAppointment from '../../../app/service/appointment';
 import ExportClinic from '../../../app/service/clinic';
 import ExportDoctor from '../../../app/service/doctor';
 import ExportPatient from '../../../app/service/patient';
+import ExportSeeder from '../../../app/service/seeder';
 import ExportUser from '../../../app/service/user';
 
 declare module 'egg' {
@@ -18,6 +19,7 @@ declare module 'egg' {
     clinic: AutoInstanceType<typeof ExportClinic>;
     doctor: AutoInstanceType<typeof ExportDoctor>;
     patient: AutoInstanceType<typeof ExportPatient>;
+    seeder: AutoInstanceType<typeof ExportSeeder>;
     user: AutoInstanceType<typeof ExportUser>;
   }
 }

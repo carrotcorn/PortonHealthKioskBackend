@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose'
 import { IAddress, Address } from './address'
 
 export type ClinicQuery = mongoose.MongooseFilterQuery<
-  Pick<IClinic, 'address' | 'phone' | 'email' | 'name' | 'ownerId'>
+  Pick<IClinic, 'address' | 'phone' | 'email' | 'name' | 'ownerId' | 'formFields'>
 >
 
 export interface IClinic extends mongoose.Document {

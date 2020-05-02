@@ -7,6 +7,7 @@ import ExportClinic from '../../../app/controller/clinic';
 import ExportDoctor from '../../../app/controller/doctor';
 import ExportPatient from '../../../app/controller/patient';
 import ExportPublic from '../../../app/controller/public';
+import ExportSeeder from '../../../app/controller/seeder';
 import ExportUser from '../../../app/controller/user';
 
 declare module 'egg' {
@@ -16,6 +17,7 @@ declare module 'egg' {
     doctor: ExportDoctor;
     patient: ExportPatient;
     public: ExportPublic;
+    seeder: ExportSeeder;
     user: ExportUser;
   }
 }
