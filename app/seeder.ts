@@ -8,6 +8,7 @@ import { Patient, IPatient } from './model/patient'
 import { patients } from './seed-data/patients'
 import { Doctor, IDoctor } from './model/doctor'
 import { doctors } from './seed-data/doctors'
+import { addDays, addMinutes, roundToNearestMinutes } from 'date-fns'
 import {
   InputType,
   inputName,
@@ -15,15 +16,15 @@ import {
   CheckInFormField,
   ICheckInFormField
 } from './model/checkinformfield'
+import { Appointment } from './model/appointment'
 
-export default async function seedDatabase(config: EggAppConfig) {
+export default async function seedDatabase (config: EggAppConfig) {
   const users = await seedUsers(config)
   const checkInFormFields = await seedCheckInFormFields()
   const clinics = await seedClinics(users, checkInFormFields)
   const patients = await seedPatients()
   const doctors = await seedDoctors()
-  console.log(users, checkInFormFields, clinics, patients, doctors)
-  // seed appointments
+  seedAppointments(patients, clinics, doctors)
 }
 
 const seedUsers = async (config) => {
@@ -88,5 +89,32 @@ const seedAppointments = async (
   doctors: IDoctor[]
 ) => {
   for (const clinic of clinics) {
+    const appointments: {}[] = []
+    const now = roundToNearestMinutes(new Date(), { nearestTo: 15 })
+    const nextDay = addDays(now, 1)
+
+    for (
+      let currTime = now;
+      currTime < nextDay;
+      currTime = addMinutes(currTime, 15)
+    ) {
+      for (let i = 0; i < doctors.length; i++) {
+        const doctorId = doctors[i]._id
+        const patientId = patients[i]._id
+        const clinicId = clinic._id
+
+        appointments.push({
+          patientId,
+          clinicId,
+          doctorId,
+          time: {
+            start: currTime,
+            end: addMinutes(currTime, 15)
+          }
+        })
+      }
+    }
+
+    Appointment.create(appointments)
   }
 }
