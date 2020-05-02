@@ -1,3 +1,7 @@
+// usernames
+export const COLLINGWOOD = 'collingwood'
+export const SUNRISE = 'sunrise'
+
 export const users = [
   {
     username: 'admin',
@@ -5,13 +9,13 @@ export const users = [
     roles: ['admin']
   },
   {
-    username: 'clinic1',
-    password: 'clinic1',
+    username: COLLINGWOOD,
+    password: 'password',
     roles: ['clinic']
   },
   {
-    username: 'clinic2',
-    password: 'clinic2',
+    username: SUNRISE,
+    password: 'password',
     roles: ['clinic']
   }
 ]
