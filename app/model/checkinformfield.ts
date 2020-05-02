@@ -58,13 +58,11 @@ export interface ICheckInFormField extends mongoose.Document {
   label: string
 }
 
-export const CheckInFormFieldSchema = new mongoose.Schema<ICheckInFormField>({
-  inputType: { type: String, required: true },
-  name: { type: String, required: true },
-  label: { type: String, required: true }
-})
-
 export const CheckInFormField = mongoose.model<ICheckInFormField>(
   'CheckInFormField',
-  CheckInFormFieldSchema
+  new mongoose.Schema<ICheckInFormField>({
+    inputType: { type: String, required: true },
+    name: { type: String, required: true },
+    label: { type: String, required: true }
+  })
 )
