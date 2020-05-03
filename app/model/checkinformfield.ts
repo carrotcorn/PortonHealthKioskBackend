@@ -52,6 +52,8 @@ export function inputLabel (type: InputType) {
   }
 }
 
+export type CheckInFormFieldQuery = mongoose.MongooseFilterQuery<Pick<ICheckInFormField, '_id' | 'inputType' | 'name' | 'label'>>
+
 export interface ICheckInFormField extends mongoose.Document {
   inputType: InputType
   name: string

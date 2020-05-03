@@ -5,12 +5,19 @@ Backend for Porton Health Kiosk
 ## API Endpoints
 
     get /csrf
+    post /seeder/seed
 
     post /appointment/create
     get /appointment/find
     post /appointment/find
     post /appointment/checkin
     put /appointment/update
+
+    post /checkinformfield/create
+    get /checkinformfield/find
+    post /checkinformfield/find
+    post /checkinformfield/checkin
+    put /checkinformfield/update
 
     get /clinic/find
     post /clinic/find

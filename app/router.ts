@@ -14,6 +14,11 @@ export default (app: Application) => {
   router.post('/appointment/checkin', controller.appointment.checkinAppointment)
   router.put('/appointment/update', controller.appointment.updateAppointment)
 
+  router.post('/checkinformfield/create', controller.checkinformfield.createCheckInFormField)
+  router.get('/checkinformfield/find', controller.checkinformfield.findCheckInFormFields)
+  router.post('/checkinformfield/find', controller.checkinformfield.findCheckInFormFields)
+  router.put('/checkinformfield/update', controller.checkinformfield.updateCheckInFormField)
+
   router.get('/clinic/find', controller.clinic.findClinics)
   router.post('/clinic/find', controller.clinic.findClinics)
   router.post('/clinic/create', controller.clinic.createClinic)

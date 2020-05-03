@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportAppointment from '../../../app/controller/appointment';
+import ExportCheckinformfield from '../../../app/controller/checkinformfield';
 import ExportClinic from '../../../app/controller/clinic';
 import ExportDoctor from '../../../app/controller/doctor';
 import ExportPatient from '../../../app/controller/patient';
@@ -13,6 +14,7 @@ import ExportUser from '../../../app/controller/user';
 declare module 'egg' {
   interface IController {
     appointment: ExportAppointment;
+    checkinformfield: ExportCheckinformfield;
     clinic: ExportClinic;
     doctor: ExportDoctor;
     patient: ExportPatient;
