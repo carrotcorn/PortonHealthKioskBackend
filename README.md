@@ -5,12 +5,19 @@ Backend for Porton Health Kiosk
 ## API Endpoints
 
     get /csrf
+    post /seeder/seed
 
     post /appointment/create
     get /appointment/find
     post /appointment/find
     post /appointment/checkin
     put /appointment/update
+
+    post /checkinformfield/create
+    get /checkinformfield/find
+    post /checkinformfield/find
+    post /checkinformfield/checkin
+    put /checkinformfield/update
 
     get /clinic/find
     post /clinic/find
@@ -54,7 +61,7 @@ For example:
     street: string
     street2?: string
     city: string
-    province?: string
+    province?: Province
     country: string
     postcode?: string
 
@@ -71,7 +78,7 @@ For example:
 
 ### CheckInFormField
 
-    inputType: string
+    inputType: InputType
     name: string
     label: string
 
@@ -82,7 +89,7 @@ For example:
     email?: string
     address: IAddress
     ownerId: string
-    formFields: ICheckInFormField[]
+    formFields: string[]
 
 ### Doctor
 
@@ -94,7 +101,7 @@ For example:
 
     familyName: string
     givenName: string
-    age: Number
+    birthday: Date
     address: IAddress
     phone: string
     email?: string
