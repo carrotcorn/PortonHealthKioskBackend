@@ -14,9 +14,9 @@ export interface IAppointment extends mongoose.Document {
 }
 
 export const Appointment = mongoose.model<IAppointment>('Appointment', new mongoose.Schema({
-  patientId: { type: mongoose.Schema.Types.ObjectId, required: true },
-  clinicId: { type: mongoose.Schema.Types.ObjectId, required: true },
-  doctorId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Patient', required: true },
+  clinicId: { type: mongoose.Schema.Types.ObjectId, ref: 'Clinic', required: true },
+  doctorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Doctor', required: true },
   time: {
     type: new mongoose.Schema({
       start: { type: Date, required: true },

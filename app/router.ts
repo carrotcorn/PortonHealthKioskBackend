@@ -6,11 +6,18 @@ export default (app: Application) => {
   router.get('/', controller.public.index)
   router.get('/csrf', controller.public.csrf)
 
+  router.post('/seeder/seed', controller.seeder.seedDatabase)
+
   router.post('/appointment/create', controller.appointment.createAppointment)
   router.get('/appointment/find', controller.appointment.findAppointments)
   router.post('/appointment/find', controller.appointment.findAppointments)
   router.post('/appointment/checkin', controller.appointment.checkinAppointment)
   router.put('/appointment/update', controller.appointment.updateAppointment)
+
+  router.post('/checkinformfield/create', controller.checkinformfield.createCheckInFormField)
+  router.get('/checkinformfield/find', controller.checkinformfield.findCheckInFormFields)
+  router.post('/checkinformfield/find', controller.checkinformfield.findCheckInFormFields)
+  router.put('/checkinformfield/update', controller.checkinformfield.updateCheckInFormField)
 
   router.get('/clinic/find', controller.clinic.findClinics)
   router.post('/clinic/find', controller.clinic.findClinics)
