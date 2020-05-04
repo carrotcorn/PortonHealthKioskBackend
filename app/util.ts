@@ -3,7 +3,7 @@ import { BaseContextClass, Context, EggAppConfig } from 'egg'
 
 export function authenticated (role?: string) {
   return function (target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<(...any) => Promise<any>>) {
-    console.log(target, propertyKey, descriptor)
+    console.log('require auth', target, propertyKey)
     if (!(target instanceof BaseContextClass)) {
       throw new ReferenceError('Decorator used at wrong place')
     }
