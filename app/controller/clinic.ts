@@ -11,7 +11,7 @@ export default class ClinicController extends Controller {
     this.ctx.body = { success: true, result }
   }
 
-  @authenticated('admin')
+  @authenticated('clinic')
   public async updateClinic () {
     const result = await this.clinicService.updateClinic(this.ctx.request.body.conditions, this.ctx.request.body.doc)
     this.ctx.body = { success: true, result }
