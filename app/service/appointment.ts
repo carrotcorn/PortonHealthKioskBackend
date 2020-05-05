@@ -15,7 +15,11 @@ export default class AppointmentService extends Service {
   }
 
   public async findAppointments (conditions: AppointmentQuery) {
-    return Appointment.find(conditions).exec()
+    return Appointment.find(conditions)
+      .populate('patientId')
+      .populate('clinicId')
+      .populate('doctorId')
+      .exec()
   }
 
   public async checkinAppointment (conditions: AppointmentQuery) {
