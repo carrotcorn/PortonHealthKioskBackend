@@ -1,15 +1,12 @@
 import { IUser, User, UserQuery } from '../model/user'
-import { authenticated } from '../util'
 import { Service } from 'egg'
 import { sm3 } from 'sm-crypto'
 
 export default class UserService extends Service {
-  @authenticated('admin')
   public async findUsers (conditions: UserQuery) {
     return User.find(conditions)
   }
 
-  @authenticated('admin')
   public async createUser (doc: IUser) {
     if (doc.password) {
       doc.password = this.getPasswordHash(doc.password)
@@ -21,7 +18,6 @@ export default class UserService extends Service {
     return user.save()
   }
 
-  @authenticated('admin')
   public async updateUser (conditions: UserQuery, doc: IUser) {
     if (doc.password) {
       doc.password = this.getPasswordHash(doc.password)
@@ -51,12 +47,10 @@ export default class UserService extends Service {
     }
   }
 
-  @authenticated()
   public async logOut () {
     this.ctx.session.user = null
   }
 
-  @authenticated()
   public async currentUser () {
     return this.ctx.session.user
   }
