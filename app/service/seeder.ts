@@ -8,7 +8,12 @@ import { Patient, IPatient } from '../model/patient'
 import { patients } from '../seed-data/patients'
 import { Doctor, IDoctor } from '../model/doctor'
 import { doctors } from '../seed-data/doctors'
-import { addDays, addMinutes, roundToNearestMinutes } from 'date-fns'
+import {
+  addDays,
+  addMinutes,
+  roundToNearestMinutes,
+  subMinutes
+} from 'date-fns'
 import {
   InputType,
   inputName,
@@ -37,15 +42,12 @@ export default class SeederService extends Service {
     )
   }
 
-  async seedClinics (
-    users: IUser[],
-    checkInFormFields: ICheckInFormField[]
-  ) {
+  async seedClinics (users: IUser[], checkInFormFields: ICheckInFormField[]) {
     const defaultFormFieldIds = checkInFormFields
       .filter(
         (field) =>
           field.inputType === InputType.BIRTHDAY ||
-        field.inputType === InputType.LAST_NAME
+          field.inputType === InputType.LAST_NAME
       )
       .map((field) => field._id)
 
@@ -91,12 +93,15 @@ export default class SeederService extends Service {
   ) {
     for (const clinic of clinics) {
       const appointments: {}[] = []
-      const now = roundToNearestMinutes(new Date(), { nearestTo: 15 })
-      const nextDay = addDays(now, 1)
+      const startTime = subMinutes(
+        roundToNearestMinutes(new Date(), { nearestTo: 15 }),
+        15
+      )
+      const endTime = addDays(startTime, 1)
 
       for (
-        let currTime = now;
-        currTime < nextDay;
+        let currTime = startTime;
+        currTime < endTime;
         currTime = addMinutes(currTime, 15)
       ) {
         for (let i = 0; i < doctors.length; i++) {
