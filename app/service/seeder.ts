@@ -25,11 +25,21 @@ import { Appointment } from '../model/appointment'
 
 export default class SeederService extends Service {
   async seedDatabase () {
-    const users = await this.seedUsers(this.app.config)
-    const checkInFormFields = await this.seedCheckInFormFields()
-    const clinics = await this.seedClinics(users, checkInFormFields)
-    const patients = await this.seedPatients()
-    const doctors = await this.seedDoctors()
+    const users = (await User.exists({}))
+      ? await User.find()
+      : await this.seedUsers(this.app.config)
+    const checkInFormFields = (await CheckInFormField.exists({}))
+      ? await CheckInFormField.find()
+      : await this.seedCheckInFormFields()
+    const clinics = (await Clinic.exists({}))
+      ? await Clinic.find()
+      : await this.seedClinics(users, checkInFormFields)
+    const patients = (await Patient.exists({}))
+      ? await Patient.find()
+      : await this.seedPatients()
+    const doctors = (await Doctor.exists({}))
+      ? await Doctor.find()
+      : await this.seedDoctors()
     this.seedAppointments(patients, clinics, doctors)
   }
 
@@ -91,13 +101,15 @@ export default class SeederService extends Service {
     clinics: IClinic[],
     doctors: IDoctor[]
   ) {
+    const startTime = (await Appointment.exists({}))
+      ? (await Appointment.find().sort({ 'time.start': -1 }).limit(1))[0].time
+        .end
+      : subMinutes(roundToNearestMinutes(new Date(), { nearestTo: 15 }), 15)
+    const endTime = addDays(startTime, 1)
+    console.log('start time', startTime, 'end time', endTime)
+
     for (const clinic of clinics) {
       const appointments: {}[] = []
-      const startTime = subMinutes(
-        roundToNearestMinutes(new Date(), { nearestTo: 15 }),
-        15
-      )
-      const endTime = addDays(startTime, 1)
 
       for (
         let currTime = startTime;
