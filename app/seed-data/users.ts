@@ -11,11 +11,13 @@ export const users = [
   {
     username: COLLINGWOOD,
     password: 'password',
-    roles: ['clinic']
+    roles: ['clinic'],
+    disabled: false
   },
   {
     username: SUNRISE,
     password: 'password',
-    roles: ['clinic']
+    roles: ['clinic'],
+    disabled: false
   }
 ]
